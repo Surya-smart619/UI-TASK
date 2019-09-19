@@ -1,0 +1,23 @@
+.container {
+	height: 100%;
+}
+
+.header {
+    height: 48px;
+    background: #346fef;
+}
+
+.leftPanel {
+	height: 100%;
+}
+
+.leftPanel button {
+    cursor: pointer;
+    padding: 4px;
+    width: 32px;
+    height: 32px;
+}
+
+.leftPanelContent {
+	padding: 0px 12px;
+}
