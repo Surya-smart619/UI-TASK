@@ -1,40 +1,71 @@
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="surya-todo.css">
+    <link rel = "stylesheet" type = "text/css" href = "surya-todo.css">
+    <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-	<div class="container">
-        <div class="header">
+	<div class = "container">
+        <div class = "header">
         </div>
-        <div class="leftPanel">
-            <div class="leftPanelMenu">
-                <button>☰</button>
+        <div id = "sideMenu" class = "leftPanel">
+            <div class = "leftPanelMenu">
+                <button id = "sideBarButton"><i class = "fa fa-bars"></i></button>
             </div>
-            <div class="leftPanelContent">
-                
-                <span>My Day</span>
+            <div class = "leftPanelContainer">
+	            <div class = "leftPanelContent">
+	                <i class = "fa fa-sun-o"></i>
+                    <div class = "leftPanelTitle">
+	                   <span>My Day</span>
+	                </div>
+	            </div>
+	            <div class = "leftPanelContent">
+	                <i class = "fa fa-star"></i>
+                    <div class = "leftPanelTitle">
+	                    <span>Important</span>
+                    </div>
+	            </div>
+	            <div class = "leftPanelContent">
+	                <i class = "fa fa-calendar"></i>
+                    <div class = "leftPanelTitle">
+	                   <span>Planned</span>
+                    </div>
+	            </div>
+	            <div class = "leftPanelContent">
+	                <i class = "fa fa-user"></i>
+                    <div class = "leftPanelTitle">
+	                   <span>Assigned to Me</span>
+                    </div>
+	            </div>
+	            <div class = "leftPanelContent">
+	                <i class = "fa fa-home"></i>
+                    <div class = "leftPanelTitle">
+	                   <span>Tasks</span>
+                    </div>
+	            </div>
+	            <div id = "sideList"></div>
             </div>
-            <div class="leftPanelContent">
-                <span>Important</span>
-            </div>
-            <div class="leftPanelContent">
-                <span>Planned</span>
-            </div>
-            <div class="leftPanelContent">
-                <span>Assigned to Me</span>
-            </div>
-            <div class="leftPanelContent">
-                <span>Tasks</span>
-            </div>
-            <div class="leftPanelContent">
-                <span>To do list</span>
-            </div>
-            <div class="leftPanelContent">
-                <input type="text"/>
+            <div class = "leftPanelContent">
+                <label><i class = "fa fa-plus"></i>
+                <div class = "leftPanelTitle">
+                    <input id = "listInput" type = "text" placeholder = "New list"/>
+                </div>
+                </label>
             </div>
         </div>
-        <div class="todoList"></div>
+        <div class = "toDoList">
+            <div id = "taskHeader"><span>Tasks</span></div>
+            <div id = "listTasks">
+            <hr>
+            <hr>
+            <hr>
+            <hr>
+            <hr>
+            <hr>
+            </div>
+            <div class = "lines"></div>
+        </div>
         <div class="rightPanel"></div>
     </div>
+    <script src = "surya-todo.js"></script>
 </body>
 </html>

@@ -1,14 +1,36 @@
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: 'Segoe', 'Segoe UI', 'Arial', 'sans-serif';
+    margin: 0;
+}
 .container {
 	height: 100%;
 }
 
 .header {
-    height: 48px;
+    height: 6.4%;
     background: #346fef;
+    position: relative;
 }
 
 .leftPanel {
-	height: 100%;
+	height: 93.6%;
+	width: 290px;
+	display: inline-block;
+	float: left;
+	position: relative;
+}
+
+.leftPanelMenu {
+	height: 48px;
+    margin-top: 12px;
+}
+
+.leftPanelContainer {
+	padding-top: 8px;
 }
 
 .leftPanel button {
@@ -16,8 +38,76 @@
     padding: 4px;
     width: 32px;
     height: 32px;
+    border: none;
+    background: transparent;
 }
 
 .leftPanelContent {
+    height: 36px;
 	padding: 0px 12px;
+	color: #34373d;
+	font-size: 1.4rem;
+	cursor: pointer;
+	background-color: rgb(244,244,244);
+}
+
+.leftPanelContent:hover {
+	background-color: rgb(250,250,250);
+}
+
+.blue {
+    color: #2e5cdb;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.leftPanelContent i {
+	height: 24px;
+	width: 24px;
+}
+
+/*.fa-sun-o { 
+	transform: scale(1.071,1.091);
+}*/
+
+.fa-user{
+	color: rgb(102, 169, 52);
+}
+
+.fa-home, .fa-bars, .fa-list, .fa-plus {
+    color: rgb(97, 119, 230);
+}
+
+.leftPanelTitle {
+    margin: 0 8px;
+    display: inline-block;
+}
+
+.leftPanelContent input[type=text] {
+	padding: 6px;
+	border: none;
+}
+
+input, button {
+    outline: none;
+}
+
+::placeholder {
+    color: #2e5cdb;
+}
+
+input:focus::-webkit-input-placeholder {
+    color: #34373d;
+}
+
+.toDoList {
+	 display: inline-block;
+	 width: 80%;
+	 height: 93.6%;
+}
+
+.lines {
+	
 }
