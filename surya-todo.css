@@ -6,6 +6,7 @@ body {
     font-family: 'Segoe', 'Segoe UI', 'Arial', 'sans-serif';
     margin: 0;
 }
+
 .container {
 	height: 100%;
 }
@@ -22,6 +23,7 @@ body {
 	display: inline-block;
 	float: left;
 	position: relative;
+	transition: width 0.3s;
 }
 
 .leftPanelMenu {
@@ -72,7 +74,7 @@ body {
 	transform: scale(1.071,1.091);
 }*/
 
-.fa-user{
+.fa-user {
 	color: rgb(102, 169, 52);
 }
 
@@ -85,7 +87,7 @@ body {
     display: inline-block;
 }
 
-.leftPanelContent input[type=text] {
+input[type=text] {
 	padding: 6px;
 	border: none;
 }
@@ -110,4 +112,45 @@ input:focus::-webkit-input-placeholder {
 
 .lines {
 	
+}
+
+.taskHeaderContainer {
+   padding: 12px 16px 0px 16px;
+}
+
+.taskHeader {
+    padding: 6px 8px;
+    display: inline-block;
+}
+
+.taskHeaderContainer button {
+	postion: relative;
+	left: 300px;
+}
+
+.listTitle {
+    position: relative;
+	color: #3e69e4;
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.addTask {
+    margin: 0 8px;
+    padding: 0 12px;
+}
+
+.addTask button {
+	width: 32px;
+    height: 32px;
+    padding: 4px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.taskInput {
+	width: 1132px;
+	height: 48px;
 }
