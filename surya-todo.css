@@ -8,7 +8,8 @@ body {
 }
 
 .container {
-	height: 100%;
+	height: 93.6%;
+	display: flex;
 }
 
 .header {
@@ -53,6 +54,13 @@ body {
 	background-color: rgb(244,244,244);
 }
 
+#listInput {
+    padding: 6px;
+    border: none;
+    width: 175px;
+    display: inline-block;
+}
+
 .leftPanelContent:hover {
 	background-color: rgb(250,250,250);
 }
@@ -61,11 +69,7 @@ body {
     color: #2e5cdb;
 }
 
-.bold {
-    font-weight: 600;
-}
-
-.leftPanelContent i {
+ i {
 	height: 24px;
 	width: 24px;
 }
@@ -87,9 +91,11 @@ body {
     display: inline-block;
 }
 
-input[type=text] {
+.addTask input[type=text] , .addStep input[type=text] {
 	padding: 6px;
 	border: none;
+	width: 100%;
+	display: inline-block;
 }
 
 input, button {
@@ -106,7 +112,7 @@ input:focus::-webkit-input-placeholder {
 
 .toDoList {
 	 display: inline-block;
-	 width: 80%;
+	 width: 100%;
 	 height: 93.6%;
 }
 
@@ -139,9 +145,10 @@ input:focus::-webkit-input-placeholder {
 .addTask {
     margin: 0 8px;
     padding: 0 12px;
+    display: flex;
 }
 
-.addTask button {
+.addTask button, .addStep button {
 	width: 32px;
     height: 32px;
     padding: 4px;
@@ -151,6 +158,110 @@ input:focus::-webkit-input-placeholder {
 }
 
 .taskInput {
-	width: 1132px;
-	height: 48px;
+	width: 100%;
 }
+
+.tasks {
+    min-height: 52px;
+    padding : 0px 12px;
+    display: flex;
+    border-bottom: 1px solid rgb(229,229,229);
+}
+
+.taskTitle {
+    width: 100%;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #34373d;
+    padding: 8px 12px;
+    vertical-align: middle;
+    line-height: 40px;
+}
+
+.taskTitle span {
+	
+}
+
+.checkBox {
+	height: 32px;
+	width: 32px;
+	cursor: pointer;
+	padding-top: 9px;
+}
+
+.taskDetails {
+    border-left: 1px solid #eaeaea;
+    height: 100%;
+    background: #f5f5f5;
+    width: 355px;
+    display: flex;
+    flex-direction: column;
+}
+
+.taskDetailsContainer {
+    padding: 10px 10px 16px 10px;
+    background-color: rgb(245,245,245);
+}
+
+.taskHeader {
+	
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.addStep {
+	display: flex;
+}
+
+.taskDetailsContent {
+	width: 341px;
+	background-color: rgb(255,255,255);
+    border-bottom: 1px solid rgb(229,229,229);
+}
+
+.addMyDay {
+	display: flex;
+	margin: 10px 0px 10px 0px;
+    background-color: rgb(255,255,255);
+    border-bottom: 1px solid rgb(229,229,229);
+}
+
+.rightContainer {
+	padding: 4px 0;
+    font-size: 1.4rem;
+    color: #767678;
+    margin: 0 8px;
+}
+
+.rightContainerAddMyDay {
+    padding: 4px 0;
+    font-size: 1.4rem;
+    color: #767678;
+    margin: 0 8px;
+    display: flex;
+}
+
+.rightSubContainer {
+	width: 100%;
+}
+
+.rightPanelContent {
+	margin: 10px 0px;
+}
+
+/*svg {
+    width: "32";
+    height: "32";
+}
+
+
+circle {
+    cx: "16";
+    cy: "16";
+    r: "8";
+    stroke: "blue";
+    stroke-width: "2";
+    fill: "white";
+} */

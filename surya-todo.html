@@ -4,9 +4,12 @@
     <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-	<div class = "container">
         <div class = "header">
+            <div class = "appName">
+                <span>To-Do</span>
+            </div>
         </div>
+    <div class = "container">
         <div id = "sideMenu" class = "leftPanel">
             <div class = "leftPanelMenu">
                 <button id = "sideBarButton"><i class = "fa fa-bars"></i></button>
@@ -44,7 +47,7 @@
 	            </div>
 	            <div id = "sideList"></div>
             </div>
-            <div class = "leftPanelContent">
+            <div class = "leftPanelContent listInput">
                 <label><i class = "fa fa-plus"></i>
                 <div class = "leftPanelTitle">
                     <input id = "listInput" type = "text" placeholder = "New list"/>
@@ -61,6 +64,15 @@
                     <!-- button class = "optionButton">...</button> -->
                 </div>
             </div>
+            <div id = "tasksContainer">
+            
+				<div class = "tasks">
+                        <span class = "checkBox"></span>
+                    <div class = "taskTitle">
+				        <span>Tasks</span>
+				    </div>
+				</div>
+        </div>
             <div class = "addTask">
                 <button><label for = "taskInput"><i class = "fa fa-plus"></i></label></button>
                 <input id = "taskInput" type = "text" placeholder = "Add Task"/>
@@ -71,7 +83,52 @@
             </div>
             <div class = "lines"></div>
         </div>
-        <div class="rightPanel"></div>
+        <div class="taskDetails">
+            <div class = "taskDetailsContainer">
+                <div class = "taskDetailsContent">
+                    <div class = "taskHeader">
+                        <span class = "checkBox"></span>
+                        <div class = "taskTitle bold">
+							<span>Tasks</span>
+						</div>
+                    </div>
+                    <div class = "steps"></div>
+		            <div class = "addStep">
+		                <button><label for = "stepInput"><i class = "fa fa-plus"></i></label></button>
+		                <input id = "stepInput" type = "text" placeholder = "Add Step"/>
+		            </div>
+                </div>
+                <div class = "addMyDay">
+                    <div class = "rightContainerAddMyDay">
+	                    <i class = "fa fa-sun-o"></i>
+	                    <div>
+	                        <span>Add to My Day</span>
+	                    </div>
+                    </div>
+                </div>
+                <div class = "rightPanelContent">
+                    <div class = "rightContainer">
+	                    <div class = "rightSubContainer">
+	                        <i class="fa fa-clock-o"></i>
+	                        <span>Remind Me</span>
+	                    </div>
+	                    <div class = "rightSubContainer">
+	                        <i class = "fa fa-calendar"></i>
+	                        <span>Add due Date</span>
+	                    </div>
+	                    <div class = "rightSubContainer">
+	                        <span>Repeat</span>
+	                    </div>
+                    </div>
+                </div>
+                <div class = "addFile">
+                    <span>Add File</span>
+                </div>
+                <div class = "addNote">
+                    <textarea></textarea>
+                </div>
+            </div>
+        </div>
     </div>
     <script src = "surya-todo.js"></script>
 </body>
