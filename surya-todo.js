@@ -1,5 +1,6 @@
 var collectionOfList = [];
 var activeList;
+var activeTask;
 
 var list = {
 	id : "",
@@ -71,6 +72,15 @@ function loadTasks() {
 	}
 }
 
+function loadSteps() {
+	document.getElementById("taskName").innerHTML = activeTask.name;
+	var stepContainer = document.getElementById("stepsContainer");
+	stepContainer.innerHTML = "";
+	for(stepIndex in activeTask.steps) {
+		let step = activeTask.steps[stepIndex];
+	}
+}
+
 document.getElementById("sideBarButton").addEventListener("click", function() {
 	if("50px" == document.getElementById("sideMenu").style.width) {
 		openLeftPanel();
@@ -99,15 +109,16 @@ var listInput = document.getElementById("listInput");
 listInput.addEventListener("keydown", function(event) {
 	if(listInput.value != "") {
 		if(event.keyCode == 13) {
-			createNewListInLeftPanel(listInput);
+			createListInLeftPanel(listInput);
 		}
 	}
 });
 
-function createNewListInLeftPanel(listInput) {
+function createListInLeftPanel(listInput) {
 	var list = new Object();
 	list.id = create_UUID();
 	list.name = listInput.value;
+	list.tasks = [];
 	collectionOfList.push(list);
 	activeList = list;
 	document.getElementById("displayListTitle").innerHTML = listInput.value;
@@ -124,24 +135,32 @@ taskInput.addEventListener("keydown", function(event) {
 		}
 	}
 });
+	
+var stepInput = document.getElementById("stepInput");
+stepInput.addEventListener("keydown", function(event) {
+	if(taskInput.value != "") {
+		if(event.keyCode == 13) {
+			createStep(stepInput);
+		}
+	}
+});
 
-/*<div class = "tasks">
-<span class = "checkBox"></span>
-<div class = "taskTitle">
-<span>Tasks</span>
-</div>
-</div>*/
-    
 function createTask(taskInput) {
 	var task = new Object();
 	task.id = create_UUID();
 	task.name = taskInput.value;
-	if(typeof activeList.tasks === "undefined") {
-		activeList.tasks = [];
-	}
+	task.steps =[];
 	activeList.tasks.push(task);
 	taskInput.value = "";
 	loadTasks();
+}
+
+function createStep(stepInput) {
+	var step = new Object();
+	step.id = create_UUID();
+	step.name = stepInput.value;
+	activeTask.steps.push(step);
+	loadSteps();
 }
 
 function addClickEventInTask(element) {

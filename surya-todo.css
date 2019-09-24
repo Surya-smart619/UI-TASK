@@ -165,6 +165,7 @@ input:focus::-webkit-input-placeholder {
 	padding: 0px 12px;
 	display: flex;
 	border-bottom: 1px solid rgb(229, 229, 229);
+	cursor: pointer;
 }
 
 .taskTitle {
