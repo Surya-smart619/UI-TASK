@@ -18,6 +18,59 @@ var step = {
 	description : ""
 };
 
+function loadLists() {
+	var listContainer = document.getElementById("sideList");
+	listContainer.innerHTML = "";
+	for(listIndex in collectionOfList){
+		let list = collectionOfList[listIndex];
+		let divElement = document.createElement("DIV");
+		addClickEventInLeftListTitle(divElement);
+		divElement.id = list.id;
+		divElement.className = "leftPanelContent";
+		let iElement = document.createElement("I");
+		iElement.className = "fa fa-list";
+		iElement.id = list.id;
+		iElement.setAttribute("aria-hidden", "true");
+		divElement.appendChild(iElement);
+		let innerDivElement = document.createElement("DIV");
+		innerDivElement.className = "leftPanelTitle blue bold";
+		innerDivElement.id = list.id;
+		let spanElement = document.createElement("SPAN");
+		spanElement.id = list.id;
+		let textElement = document.createTextNode(list.name);
+		spanElement.appendChild(textElement);
+		innerDivElement.appendChild(spanElement);
+		divElement.appendChild(innerDivElement);
+		listContainer.appendChild(divElement);
+	}
+}
+
+function loadTasks() {
+	var taskContainer = document.getElementById("tasksContainer");
+	taskContainer.innerHTML = "";
+	for(taskIndex in activeList.tasks) {
+		let task = activeList.tasks[taskIndex];
+		let divElement = document.createElement("DIV");
+		addClickEventInTask(divElement);
+		divElement.className = "tasks";
+		divElement.id = task.id;
+		let spanElementForCheckBox = document.createElement("SPAN");
+		spanElementForCheckBox.className = "checkBox";
+		spanElementForCheckBox.id = task.id;
+		divElement.appendChild(spanElementForCheckBox);
+		let innerDivElement = document.createElement("DIV");
+		innerDivElement.className = "taskTitle";
+		innerDivElement.id = task.id;
+		let spanElement = document.createElement("SPAN");
+		spanElement.id = task.id;
+		let textElement = document.createTextNode(task.name);
+		spanElement.appendChild(textElement);
+		innerDivElement.appendChild(spanElement);
+		divElement.appendChild(innerDivElement);
+		taskContainer.appendChild(divElement);
+	}
+}
+
 document.getElementById("sideBarButton").addEventListener("click", function() {
 	if("50px" == document.getElementById("sideMenu").style.width) {
 		openLeftPanel();
@@ -57,28 +110,10 @@ function createNewListInLeftPanel(listInput) {
 	list.name = listInput.value;
 	collectionOfList.push(list);
 	activeList = list;
-	var listContainer = document.getElementById("sideList");
-	var divElement = document.createElement("DIV");
-	addClickEventInLeftListTitle(divElement);
-	divElement.id = list.id;
-	divElement.className = "leftPanelContent";
-	var iElement = document.createElement("I");
-	iElement.className = "fa fa-list";
-	iElement.id = list.id;
-	iElement.setAttribute("aria-hidden", "true");
-	divElement.appendChild(iElement);
-	var innerDivElement = document.createElement("DIV");
-	innerDivElement.className = "leftPanelTitle blue bold";
-	innerDivElement.id = list.id;
-	var spanElement = document.createElement("SPAN");
-	spanElement.id = list.id;
-	var textElement = document.createTextNode(listInput.value);
-	spanElement.appendChild(textElement);
-	innerDivElement.appendChild(spanElement);
-	divElement.appendChild(innerDivElement);
-	listContainer.appendChild(divElement);
 	document.getElementById("displayListTitle").innerHTML = listInput.value;
 	listInput.value = "";
+	loadLists();
+	document.getElementById("tasksContainer").innerHTML = "";
 }
 
 var taskInput = document.getElementById("taskInput");
@@ -105,20 +140,17 @@ function createTask(taskInput) {
 		activeList.tasks = [];
 	}
 	activeList.tasks.push(task);
-	var divElement = document.createElement("DIV");
-	divElement.className = "tasks";
-	var spanElementForCheckBox = document.createElement("SPAN");
-	spanElementForCheckBox.className = "checkBox";
-	divElement.appendChild(spanElementForCheckBox);
-	var innerDivElement = document.createElement("DIV");
-	innerDivElement.className = "taskTitle";
-	var spanElement = document.createElement("SPAN");
-	var textElement = document.createTextNode(taskInput.value);
-	spanElement.appendChild(textElement);
-	innerDivElement.appendChild(spanElement);
-	divElement.appendChild(innerDivElement);
-	document.getElementById("tasksContainer").appendChild(divElement);
 	taskInput.value = "";
+	loadTasks();
+}
+
+function addClickEventInTask(element) {
+	element.addEventListener("click", function(event) {
+		var activeTaskId = event.target.id;
+		activeTask = activeList.tasks.find(task => task.id === activeTaskId);
+		document.getElementById("taskDetails").style.display = "block";
+		loadSteps();
+	});
 }
 
 function addClickEventInLeftListTitle(element) {
@@ -126,6 +158,8 @@ function addClickEventInLeftListTitle(element) {
 		var activeListId = event.target.id;
 		activeList = collectionOfList.find(list => list.id === activeListId);
 		document.getElementById("displayListTitle").innerHTML = activeList.name;
+		document.getElementById("taskDetails").style.display = "none";
+		loadTasks();
 	});
 }
 

@@ -83,7 +83,7 @@
             </div>
             <div class = "lines"></div>
         </div>
-        <div class="taskDetails">
+        <div id = "taskDetails" class="taskDetails">
             <div class = "taskDetailsContainer">
                 <div class = "taskDetailsContent">
                     <div class = "taskHeader">
@@ -110,23 +110,33 @@
                     <div class = "rightContainer">
 	                    <div class = "rightSubContainer">
 	                        <i class="fa fa-clock-o"></i>
-	                        <span>Remind Me</span>
+	                        <div class = "rightSubContainerTitle">
+	                           <span>Remind Me</span>
+	                        </div>
 	                    </div>
 	                    <div class = "rightSubContainer">
 	                        <i class = "fa fa-calendar"></i>
-	                        <span>Add due Date</span>
+	                        <div class = "rightSubContainerTitle">
+	                           <span>Add due Date</span>
+	                        </div>
 	                    </div>
 	                    <div class = "rightSubContainer">
-	                        <span>Repeat</span>
+	                        <i class="fa fa-repeat"></i>
+	                        <div class = "rightSubContainerTitle">
+	                           <span>Repeat</span>
+	                        </div>
 	                    </div>
                     </div>
                 </div>
-                <div class = "addFile">
-                    <span>Add File</span>
+                <div class = "addFile taskTitle">
+                    <i class="fa fa-paperclip"></i>
+                    <div>
+                        <span>Add File</span>
+                    </div>
                 </div>
-                <div class = "addNote">
+                <!-- div class = "addNote">
                     <textarea></textarea>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

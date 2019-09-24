@@ -1,10 +1,10 @@
 html {
-    font-size: 62.5%;
+	font-size: 62.5%;
 }
 
 body {
-    font-family: 'Segoe', 'Segoe UI', 'Arial', 'sans-serif';
-    margin: 0;
+	font-family: 'Segoe', 'Segoe UI', 'Arial', 'sans-serif';
+	margin: 0;
 }
 
 .container {
@@ -13,14 +13,13 @@ body {
 }
 
 .header {
-    height: 6.4%;
-    background: #346fef;
-    position: relative;
+	height: 6.4%;
+	background: #346fef;
+	position: relative;
 }
 
 .leftPanel {
 	height: 93.6%;
-	width: 290px;
 	display: inline-block;
 	float: left;
 	position: relative;
@@ -29,47 +28,48 @@ body {
 
 .leftPanelMenu {
 	height: 48px;
-    margin-top: 12px;
+	margin-top: 12px;
 }
 
 .leftPanelContainer {
 	padding-top: 8px;
+    width: 290px;
 }
 
 .leftPanel button {
-    cursor: pointer;
-    padding: 4px;
-    width: 32px;
-    height: 32px;
-    border: none;
-    background: transparent;
+	cursor: pointer;
+	padding: 4px;
+	width: 32px;
+	height: 32px;
+	border: none;
+	background: transparent;
 }
 
 .leftPanelContent {
-    height: 36px;
+	height: 36px;
 	padding: 0px 12px;
 	color: #34373d;
 	font-size: 1.4rem;
 	cursor: pointer;
-	background-color: rgb(244,244,244);
+	background-color: rgb(244, 244, 244);
 }
 
 #listInput {
-    padding: 6px;
-    border: none;
-    width: 175px;
-    display: inline-block;
+	padding: 6px;
+	border: none;
+	width: 175px;
+	display: inline-block;
 }
 
 .leftPanelContent:hover {
-	background-color: rgb(250,250,250);
+	background-color: rgb(250, 250, 250);
 }
 
 .blue {
-    color: #2e5cdb;
+	color: #2e5cdb;
 }
 
- i {
+i {
 	height: 24px;
 	width: 24px;
 }
@@ -77,21 +77,20 @@ body {
 /*.fa-sun-o { 
 	transform: scale(1.071,1.091);
 }*/
-
 .fa-user {
 	color: rgb(102, 169, 52);
 }
 
 .fa-home, .fa-bars, .fa-list, .fa-plus {
-    color: rgb(97, 119, 230);
+	color: rgb(97, 119, 230);
 }
 
 .leftPanelTitle {
-    margin: 0 8px;
-    display: inline-block;
+	margin: 0 8px;
+	display: inline-block;
 }
 
-.addTask input[type=text] , .addStep input[type=text] {
+.addTask input[type=text], .addStep input[type=text] {
 	padding: 6px;
 	border: none;
 	width: 100%;
@@ -99,21 +98,21 @@ body {
 }
 
 input, button {
-    outline: none;
+	outline: none;
 }
 
 ::placeholder {
-    color: #2e5cdb;
+	color: #2e5cdb;
 }
 
 input:focus::-webkit-input-placeholder {
-    color: #34373d;
+	color: #34373d;
 }
 
 .toDoList {
-	 display: inline-block;
-	 width: 100%;
-	 height: 93.6%;
+	display: inline-block;
+	width: 100%;
+	height: 93.6%;
 }
 
 .lines {
@@ -121,12 +120,12 @@ input:focus::-webkit-input-placeholder {
 }
 
 .taskHeaderContainer {
-   padding: 12px 16px 0px 16px;
+	padding: 12px 16px 0px 16px;
 }
 
 .taskHeader {
-    padding: 6px 8px;
-    display: inline-block;
+	padding: 6px 8px;
+	display: inline-block;
 }
 
 .taskHeaderContainer button {
@@ -135,26 +134,26 @@ input:focus::-webkit-input-placeholder {
 }
 
 .listTitle {
-    position: relative;
+	position: relative;
 	color: #3e69e4;
-    font-size: 2rem;
-    font-weight: 600;
-    margin: 0;
+	font-size: 2rem;
+	font-weight: 600;
+	margin: 0;
 }
 
 .addTask {
-    margin: 0 8px;
-    padding: 0 12px;
-    display: flex;
+	margin: 0 8px;
+	padding: 0 12px;
+	display: flex;
 }
 
 .addTask button, .addStep button {
 	width: 32px;
-    height: 32px;
-    padding: 4px;
-    cursor: pointer;
-    border: none;
-    background: transparent;
+	height: 32px;
+	padding: 4px;
+	cursor: pointer;
+	border: none;
+	background: transparent;
 }
 
 .taskInput {
@@ -162,20 +161,19 @@ input:focus::-webkit-input-placeholder {
 }
 
 .tasks {
-    min-height: 52px;
-    padding : 0px 12px;
-    display: flex;
-    border-bottom: 1px solid rgb(229,229,229);
+	min-height: 52px;
+	padding: 0px 12px;
+	display: flex;
+	border-bottom: 1px solid rgb(229, 229, 229);
 }
 
 .taskTitle {
-    width: 100%;
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: #34373d;
-    padding: 8px 12px;
-    vertical-align: middle;
-    line-height: 40px;
+	font-size: 1.4rem;
+	font-weight: 500;
+	color: #34373d;
+	padding: 8px 12px;
+	vertical-align: middle;
+	line-height: 40px;
 }
 
 .taskTitle span {
@@ -190,25 +188,26 @@ input:focus::-webkit-input-placeholder {
 }
 
 .taskDetails {
-    border-left: 1px solid #eaeaea;
-    height: 100%;
-    background: #f5f5f5;
-    width: 355px;
-    display: flex;
-    flex-direction: column;
+	border-left: 1px solid #eaeaea;
+	height: 100%;
+	background: #f5f5f5;
+	display: none;
 }
 
 .taskDetailsContainer {
-    padding: 10px 10px 16px 10px;
-    background-color: rgb(245,245,245);
+	padding: 10px 10px 16px 10px;
+	background-color: rgb(245, 245, 245);
+	width: 355px;
+	display: flex;
+	flex-direction: column;
 }
 
-.taskHeader {
+.taskleftPanelContainerHeader {
 	
 }
 
 .bold {
-    font-weight: 600;
+	font-weight: 600;
 }
 
 .addStep {
@@ -216,39 +215,54 @@ input:focus::-webkit-input-placeholder {
 }
 
 .taskDetailsContent {
-	width: 341px;
-	background-color: rgb(255,255,255);
-    border-bottom: 1px solid rgb(229,229,229);
+	background-color: rgb(255, 255, 255);
+	border: 1px solid rgb(229, 229, 229);
 }
 
 .addMyDay {
 	display: flex;
 	margin: 10px 0px 10px 0px;
-    background-color: rgb(255,255,255);
-    border-bottom: 1px solid rgb(229,229,229);
+	background-color: rgb(255, 255, 255);
+	border: 1px solid rgb(229, 229, 229);
+	padding: 13px 6px;
 }
 
 .rightContainer {
 	padding: 4px 0;
-    font-size: 1.4rem;
-    color: #767678;
-    margin: 0 8px;
+	font-size: 1.4rem;
+	color: #767678;
+	background-color: rgb(255, 255, 255);
+	border: 1px solid rgb(229, 229, 229);
 }
 
 .rightContainerAddMyDay {
-    padding: 4px 0;
-    font-size: 1.4rem;
-    color: #767678;
-    margin: 0 8px;
-    display: flex;
+	padding: 4px 0;
+	font-size: 1.4rem;
+	color: #767678;
+	margin: 0 8px;
+	display: flex;
 }
 
 .rightSubContainer {
+	display: flex;
+	padding: 0 12px;
+	margin-top: 36px;
+}
+
+.rightSubContainerTitle {
+	border-bottom: 1px solid rgb(229, 229, 229);
 	width: 100%;
 }
 
 .rightPanelContent {
 	margin: 10px 0px;
+}
+
+.addFile {
+	display: flex;
+	background-color: rgb(255, 255, 255);
+	border: 1px solid rgb(229, 229, 229);
+	color: #767678;
 }
 
 /*svg {
