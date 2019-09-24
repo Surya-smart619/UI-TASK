@@ -10,11 +10,11 @@
             </div>
         </div>
     <div class = "container">
-        <div id = "sideMenu" class = "leftPanel">
+        <div class = "leftPanel">
             <div class = "leftPanelMenu">
                 <button id = "sideBarButton"><i class = "fa fa-bars"></i></button>
             </div>
-            <div class = "leftPanelContainer">
+            <div id = "sideMenu" class = "leftPanelContainer">
 	            <div class = "leftPanelContent">
 	                <i class = "fa fa-sun-o"></i>
                     <div class = "leftPanelTitle">
@@ -67,12 +67,8 @@
             <div id = "tasksContainer">
             
 				<div class = "tasks">
-                        <span class = "checkBox"></span>
-                    <div class = "taskTitle">
-				        <span>Tasks</span>
-				    </div>
 				</div>
-        </div>
+            </div>
             <div class = "addTask">
                 <button><label for = "taskInput"><i class = "fa fa-plus"></i></label></button>
                 <input id = "taskInput" type = "text" placeholder = "Add Task"/>
@@ -87,12 +83,15 @@
             <div class = "taskDetailsContainer">
                 <div class = "taskDetailsContent">
                     <div class = "taskHeader">
-                        <span class = "checkBox"></span>
-                        <div class = "taskTitle bold">
+                        <div class = "checkBox">
+                            <input type="checkbox" id="checkbox" />
+                            <label for="checkbox"></label>
+                        </div>
+                        <div class = "taskTitleInRightPanel bold">
 							<span id = "taskName"></span>
 						</div>
                     </div>
-                    <div class = "steps"></div>
+                    <div id = "stepsContainer"></div>
 		            <div class = "addStep">
 		                <button><label for = "stepInput"><i class = "fa fa-plus"></i></label></button>
 		                <input id = "stepInput" type = "text" placeholder = "Add Step"/>
