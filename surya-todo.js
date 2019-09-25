@@ -74,11 +74,11 @@ function loadTasks() {
         checkBoxDiv.className = "checkBox";
         let checkBox = document.createElement("INPUT");
         checkBox.type = "checkbox";
-        checkBox.id = "id" + task.id;
+        checkBox.id = "input" + task.id;
         checkBox.name = task.id;
         addEventListenerForCheckBox(checkBox);
         let label = document.createElement("LABEL");
-        label.htmlFor = "id" + task.id;
+        label.htmlFor = "input" + task.id;
         checkBoxDiv.appendChild(checkBox);
         checkBoxDiv.appendChild(label);
         divElement.appendChild(checkBoxDiv);
@@ -98,12 +98,13 @@ function loadTasks() {
         spanElement.appendChild(textElement);
         innerDivElement.appendChild(spanElement);
         let stepCount = task.steps.filter(step => step.status === true).length;
+        console.log(stepCount);
         if(stepCount > 0) {
             let finishedStepCount = task.steps.filter(step => step.isFinished === true).length;
             let spanStepCount = document.createElement("SPAN");
             let textStepCount = document.createTextNode(finishedStepCount + " of " + stepCount);
             spanStepCount.appendChild(textStepCount);
-           // innerDivElement.appendChild(spanStepCount);
+            innerDivElement.appendChild(spanStepCount);
         }
         divElement.appendChild(innerDivElement);
         taskContainer.appendChild(divElement);
@@ -113,7 +114,6 @@ function loadTasks() {
 
 var rightPanelCheckBox = document.getElementById("checkbox");
 rightPanelCheckBox.addEventListener("change", function(event) {
-    console.log(event.target);
     if(this.checked) {
         rightPanelCheckBox.checked = true;
         activeTask.isFinished = true;
@@ -121,14 +121,13 @@ rightPanelCheckBox.addEventListener("change", function(event) {
         rightPanelCheckBox.checked = false;
         activeTask.isFinished = false;
     }
-    loadTasks();
     loadSteps();
+    loadTasks();
 });
 
 
 function addEventListenerForCheckBox(element) {
-    element.addEventListener("change", function(event) {
-        console.log(event.target);
+    element.addEventListener("change", function(event){
         var taskId = event.target.name;
         var task = activeList.tasks.find(task => task.id === taskId);
         if(this.checked) {
@@ -145,7 +144,6 @@ function addEventListenerForCheckBox(element) {
 
 function addEventListenerForStepCheckBox(element) {
     element.addEventListener("change", function(event){
-        console.log(event.target);
         var stepId = event.target.name;
         var step = activeTask.steps.find(step => step.id === stepId);
         if(this.checked) {
@@ -154,6 +152,7 @@ function addEventListenerForStepCheckBox(element) {
             step.isFinished = false;
         }
         loadSteps();
+        loadTasks();
     });
 }
 
@@ -209,7 +208,6 @@ function loadSteps() {
         divElement.appendChild(innerDivElement);
         stepContainer.appendChild(divElement);
     }
-    loadTasks();
 }
 
 document.getElementById("sideBarButton").addEventListener("click", function() {
@@ -227,6 +225,7 @@ function addEventListenerForStepDeletion(element) {
             var step = activeTask.steps.find(step => step.id === stepId);
             step.status = false;
             loadSteps();
+            loadTasks();
         }
     });
 }
@@ -310,11 +309,11 @@ function createStep(stepInput) {
     activeTask.steps.push(step);
     stepInput.value = "";
     loadSteps();
+    loadTasks();
 }
 
 function addClickEventInTask(element) {
     element.addEventListener("click", function(event) {
-        console.log(event.target)
         if(event.target.tagName === 'INPUT') {
             var activeTaskId = event.target.name;
         } else {
