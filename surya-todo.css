@@ -12,6 +12,25 @@ body {
 	display: flex;
 }
 
+.appName {
+	color: #FFFFFF;
+	cursor: pointer;
+	display: inline-block;
+	padding: 0px 19px;
+	font-size: 1.4rem;
+	heigth: 100%;
+	line-height: 48px;
+}
+.deletion {
+	float: right;
+}
+
+#trashListIcon {
+	float: right;
+	font-size: 2.2rem;
+	color:  #34373d;
+	cursor: pointer;
+}
 .header {
 	height: 6.4%;
 	background: #346fef;
@@ -19,13 +38,14 @@ body {
 }
 
 .leftPanel {
-	height: 93.6%;
+	/* height: 93.6%; */
 	display: inline-block;
 	float: left;
 	position: relative;
 }
 
 .leftPanelMenu {
+	/* position: sticky; */
 	height: 48px;
 	margin-top: 12px;
 }
@@ -52,13 +72,18 @@ body {
 	font-size: 1.4rem;
 	cursor: pointer;
 	background-color: rgb(244, 244, 244);
+	display:  flex;
 }
 
 #listInput {
 	padding: 6px;
 	border: none;
-	width: 175px;
-	display: inline-block;
+	width: auto;
+	/* display: inline-block; */
+}
+
+.listInput {
+	position: sticky;
 }
 
 .leftPanelContent:hover {
@@ -87,7 +112,8 @@ i {
 
 .leftPanelTitle {
 	margin: 0 8px;
-	display: inline-block;
+	display: flex;
+	width: 100%;
 }
 
 .addTask input[type=text], .addStep input[type=text] {
@@ -154,6 +180,7 @@ input:focus::-webkit-input-placeholder {
 	cursor: pointer;
 	border: none;
 	background: transparent;
+	margin-top: 11px;
 }
 
 .taskInput {
@@ -161,7 +188,7 @@ input:focus::-webkit-input-placeholder {
 }
 
 .tasks {
-	min-height: 52px;
+	min-height: 37px;
 	padding: 0px 12px;
 	display: flex;
 	border-bottom: 1px solid rgb(229, 229, 229);
@@ -172,14 +199,28 @@ input:focus::-webkit-input-placeholder {
 	font-size: 1.4rem;
 	font-weight: 500;
 	color: #34373d;
-	padding: 8px 12px;
+	padding: 0px 12px;
 	vertical-align: middle;
-	line-height: 40px;
+	line-height: 54px;
 	/* position:  absolute; */
+	display: flex;
+	flex-direction: column;
+	/* margin-top: -16px; */
+	/* height: 28px; */
 }
 
 .taskTitle span {
 	padding-left: 11px;
+}
+.stepCheckBox {
+	background-color: #fff;
+	/* border: 1px solid #ccc; */
+	border-radius: 50%;
+	cursor: pointer;
+	height: 20px;
+	left: 0;
+	position: absolute;
+	width: 20px;
 }
 
 .checkBox {
@@ -195,8 +236,8 @@ input:focus::-webkit-input-placeholder {
 	left: 0;
 	position: absolute;
 	width: 24px;
-	margin-top: 15px;
-  }
+	/* margin-top: 15px; */
+	}
 
 .checkBox input[type="checkbox"] {
     visibility: hidden;
@@ -299,7 +340,6 @@ input:focus::-webkit-input-placeholder {
 }
 
 #stepsContainer {
-	min-height: 52px;
 	padding: 0px 12px;
 	display: flex;
 	/* border-bottom: 1px solid rgb(229, 229, 229); */
@@ -310,10 +350,11 @@ input:focus::-webkit-input-placeholder {
 .stepTitle {
 	border-bottom: 1px solid rgb(229, 229, 229);
 	font-size: 1.4rem;
-    line-height: 1.8rem;
-    font-weight: 500;
-    padding: 10px 10px;
-    width: 95%;
+	line-height: 1.8rem;
+	font-weight: 500;
+	padding: 10px 37px;
+	/* width: 95%; */
+	margin-top: -11px;
 }
 
 .step{
@@ -332,18 +373,15 @@ input:focus::-webkit-input-placeholder {
 	vertical-align: middle;
 	line-height: 40px;
 	margin-top: -16px;
-}
-/*svg {
-    width: "32";
-    height: "32";
+	margin-left: 39px;
 }
 
+.taskCount {
+	margin-left: auto;
+	color: #34373d;
+	font-weight: 400;
+}
 
-circle {
-    cx: "16";
-    cy: "16";
-    r: "8";
-    stroke: "blue";
-    stroke-width: "2";
-    fill: "white";
-} */
+.countDiv {
+	width: 100%;
+}
