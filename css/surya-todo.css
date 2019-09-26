@@ -1,0 +1,387 @@
+html {
+	font-size: 62.5%;
+}
+
+body {
+	font-family: 'Segoe', 'Segoe UI', 'Arial', 'sans-serif';
+	margin: 0;
+}
+
+.container {
+	height: 93.6%;
+	display: flex;
+}
+
+.appName {
+	color: #FFFFFF;
+	cursor: pointer;
+	display: inline-block;
+	padding: 0px 19px;
+	font-size: 1.4rem;
+	heigth: 100%;
+	line-height: 48px;
+}
+.deletion {
+	float: right;
+}
+
+#trashListIcon {
+	float: right;
+	font-size: 2.2rem;
+	color:  #34373d;
+	cursor: pointer;
+}
+.header {
+	height: 6.4%;
+	background: #346fef;
+	position: relative;
+}
+
+.leftPanel {
+	/* height: 93.6%; */
+	display: inline-block;
+	float: left;
+	position: relative;
+}
+
+.leftPanelMenu {
+	/* position: sticky; */
+	height: 48px;
+	margin-top: 12px;
+}
+
+.leftPanelContainer {
+	padding-top: 8px;
+    width: 290px;
+	transition: width 0.3s;
+}
+
+.leftPanel button {
+	cursor: pointer;
+	padding: 4px;
+	width: 32px;
+	height: 32px;
+	border: none;
+	background: transparent;
+}
+
+.leftPanelContent {
+	height: 36px;
+	padding: 0px 12px;
+	color: #34373d;
+	font-size: 1.4rem;
+	cursor: pointer;
+	background-color: rgb(244, 244, 244);
+	display:  flex;
+}
+
+#listInput {
+	padding: 6px;
+	border: none;
+	width: auto;
+	/* display: inline-block; */
+}
+
+.listInput {
+	position: sticky;
+}
+
+.leftPanelContent:hover {
+	background-color: rgb(250, 250, 250);
+}
+
+.blue {
+	color: #2e5cdb;
+}
+
+i {
+	height: 24px;
+	width: 24px;
+}
+
+/*.fa-sun-o { 
+	transform: scale(1.071,1.091);
+}*/
+.fa-user {
+	color: rgb(102, 169, 52);
+}
+
+.fa-home, .fa-bars, .fa-list, .fa-plus {
+	color: rgb(97, 119, 230);
+}
+
+.leftPanelTitle {
+	margin: 0 8px;
+	display: flex;
+	width: 100%;
+}
+
+.addTask input[type=text], .addStep input[type=text] {
+	padding: 6px;
+	border: none;
+	width: 100%;
+	display: inline-block;
+}
+
+input, button {
+	outline: none;
+}
+
+::placeholder {
+	color: #2e5cdb;
+}
+
+input:focus::-webkit-input-placeholder {
+	color: #34373d;
+}
+
+.toDoList {
+	display: inline-block;
+	width: 100%;
+	height: 93.6%;
+}
+
+.lines {
+	
+}
+
+.taskHeaderContainer {
+	padding: 12px 16px 0px 16px;
+}
+
+.taskHeader {
+	padding: 6px 8px;
+	display: inline-block;
+}
+
+.taskHeaderContainer button {
+	postion: relative;
+	left: 300px;
+}
+
+.listTitle {
+	position: relative;
+	color: #3e69e4;
+	font-size: 2rem;
+	font-weight: 600;
+	margin: 0;
+}
+
+.addTask {
+	margin: 0 8px;
+	padding: 0 12px;
+	display: flex;
+}
+
+.addTask button, .addStep button {
+	width: 32px;
+	height: 32px;
+	padding: 4px;
+	cursor: pointer;
+	border: none;
+	background: transparent;
+	margin-top: 11px;
+}
+
+.taskInput {
+	width: 100%;
+}
+
+.tasks {
+	min-height: 37px;
+	padding: 0px 12px;
+	display: flex;
+	border-bottom: 1px solid rgb(229, 229, 229);
+	cursor: pointer;
+}
+
+.taskTitle {
+	font-size: 1.4rem;
+	font-weight: 500;
+	color: #34373d;
+	padding: 0px 12px;
+	vertical-align: middle;
+	line-height: 54px;
+	/* position:  absolute; */
+	display: flex;
+	flex-direction: column;
+	/* margin-top: -16px; */
+	/* height: 28px; */
+}
+
+.taskTitle span {
+	padding-left: 11px;
+}
+.stepCheckBox {
+	background-color: #fff;
+	/* border: 1px solid #ccc; */
+	border-radius: 50%;
+	cursor: pointer;
+	height: 20px;
+	left: 0;
+	position: absolute;
+	width: 20px;
+}
+
+.checkBox {
+	position: relative;
+}
+
+.checkBox label {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 50%;
+	cursor: pointer;
+	height: 24px;
+	left: 0;
+	position: absolute;
+	width: 24px;
+	margin-top: 15px;
+	}
+
+.checkBox input[type="checkbox"] {
+    visibility: hidden;
+}
+
+.checkBox input[type="checkbox"]:checked + label {
+ 	background-color: rgb(62, 105, 228);
+	border-color: rgb(62, 105, 228);
+}
+
+.checkBox label:after {
+	border: 2px solid #fff;
+	border-top: none;
+	border-right: none;
+	content: "";
+	height: 4px;
+	left: 6px;
+	position: absolute;
+	top: 8px;
+	transform: rotate(-45deg);
+	width: 12px;
+  }
+  
+.taskDetails {
+	border-left: 1px solid #eaeaea;
+	height: 100%;
+	background: #f5f5f5;
+	display: none;
+}
+
+.taskDetailsContainer {
+	padding: 10px 10px 16px 10px;
+	background-color: rgb(245, 245, 245);
+	width: 355px;
+	display: flex;
+	flex-direction: column;
+}
+
+.taskleftPanelContainerHeader {
+	
+}
+
+.bold {
+	font-weight: 600;
+}
+
+.addStep {
+	display: flex;
+}
+
+.taskDetailsContent {
+	background-color: rgb(255, 255, 255);
+	border: 1px solid rgb(229, 229, 229);
+}
+
+.addMyDay {
+	display: flex;
+	margin: 10px 0px 10px 0px;
+	background-color: rgb(255, 255, 255);
+	border: 1px solid rgb(229, 229, 229);
+	padding: 13px 6px;
+}
+
+.rightContainer {
+	padding: 4px 0;
+	font-size: 1.4rem;
+	color: #767678;
+	background-color: rgb(255, 255, 255);
+	border: 1px solid rgb(229, 229, 229);
+}
+
+.rightContainerAddMyDay {
+	padding: 4px 0;
+	font-size: 1.4rem;
+	color: #767678;
+	margin: 0 8px;
+	display: flex;
+}
+
+.rightSubContainer {
+	display: flex;
+	padding: 0 12px;
+	margin-top: 36px;
+}
+
+.rightSubContainerTitle {
+	border-bottom: 1px solid rgb(229, 229, 229);
+	width: 100%;
+}
+
+.rightPanelContent {
+	margin: 10px 0px;
+}
+
+.addFile {
+	display: flex;
+	background-color: rgb(255, 255, 255);
+	border: 1px solid rgb(229, 229, 229);
+	color: #767678;
+}
+
+#stepsContainer {
+	padding: 0px 12px;
+	display: flex;
+	/* border-bottom: 1px solid rgb(229, 229, 229); */
+	cursor: pointer;
+	flex-direction: column;
+}
+
+.stepTitle {
+	border-bottom: 1px solid rgb(229, 229, 229);
+	font-size: 1.4rem;
+	line-height: 1.8rem;
+	font-weight: 500;
+	padding: 10px 37px;
+	/* width: 95%; */
+	margin-top: -11px;
+}
+
+.step{
+	width: 100%;
+}
+
+.finished {
+	text-decoration: line-through;
+}
+
+.taskTitleInRightPanel {
+	font-size: 1.4rem;
+	font-weight: 500;
+	color: #34373d;
+	padding: 7px 39px;
+	vertical-align: middle;
+	line-height: 40px;
+	margin-top: -16px;
+	margin-left: 39px;
+}
+
+.taskCount {
+	margin-left: auto;
+	color: #34373d;
+	font-weight: 400;
+}
+
+.countDiv {
+	width: 100%;
+}
