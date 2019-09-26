@@ -2,43 +2,89 @@ var collectionOfList = [];
 var activeList;
 var activeTask;
 
+function getDiv() {
+    return document.createElement("DIV");
+}
+
+function getSpan() {
+    return document.createElement("SPAN");
+}
+
+function setElementAsEmpty(element) {
+    element.innerHTML = "";
+}
+
+function getUndeletedObjects(array) {
+    return array.filter(object => object.status === true);
+}
+
+function getListDiv(list) {
+    var divElement = getDiv();
+    addClickEventInLeftListTitle(divElement);
+    divElement.id = list.id;
+    divElement.className = "leftPanelContent";
+    return divElement;
+}
+
+function getListIcon(list) {
+    var iElement = document.createElement("I");
+    iElement.className = "fa fa-list";
+    iElement.id = list.id;
+    return iElement;
+}
+
+function getListInnerDiv(list) {
+    var divElement = getDiv();
+    divElement.className = "leftPanelTitle blue bold";
+    divElement.id = list.id;
+    return divElement;
+}
+
+function getSpanWithTextNode(object) {
+    var spanElement = getSpan();
+    spanElement.id = object.id;
+    let textElement = document.createTextNode(object.name);
+    spanElement.appendChild(textElement);
+    return spanElement;
+}
+
+function getUnfinishedObjectFromArray(array) {
+    return array.filter(object => object.isFinished === false);
+}
+
+function setUnfinishedTaskCountInDiv(list, div) {
+    var unFinishedTasksLength = getUnfinishedObjectFromArray(list.tasks).length;
+    if(unFinishedTasksLength > 0) {
+        var spanElementForTaskCount = getSpan();
+        spanElementForTaskCount.id = list.id;
+        spanElementForTaskCount.className = "taskCount";
+        var CountTextElement = document.createTextNode(unFinishedTasksLength);
+        spanElementForTaskCount.appendChild(CountTextElement);
+        div.appendChild(spanElementForTaskCount);
+    }
+}
+
 function loadLists() {
     var listContainer = document.getElementById("sideList");
-    listContainer.innerHTML = "";
-    var unDeletedList = collectionOfList.filter(list => list.status === true);
+    setElementAsEmpty(listContainer);
+    var unDeletedList = getUndeletedObjects(collectionOfList);
     for (listIndex in unDeletedList) {
         let list = unDeletedList[listIndex];
-        let divElement = document.createElement("DIV");
-        addClickEventInLeftListTitle(divElement);
-        divElement.id = list.id;
-        divElement.className = "leftPanelContent";
-        let iElement = document.createElement("I");
-        iElement.className = "fa fa-list";
-        iElement.id = list.id;
-        iElement.setAttribute("aria-hidden", "true");
+        let divElement = getListDiv(list);
+        let iElement = getListIcon(list);
         divElement.appendChild(iElement);
-        let innerDivElement = document.createElement("DIV");
-        innerDivElement.className = "leftPanelTitle blue bold";
-        innerDivElement.id = list.id;
-        let spanElement = document.createElement("SPAN");
-        spanElement.id = list.id;
-        let textElement = document.createTextNode(list.name);
-        spanElement.appendChild(textElement);
+        let innerDivElement = getListInnerDiv(list);
+        let spanElement = getSpanWithTextNode(list);
         innerDivElement.appendChild(spanElement);
-        let unFinishedTasksLength = list.tasks.filter(task => task.isFinished === false).length;
-        if(unFinishedTasksLength > 0) {
-            let spanElementForTaskCount = document.createElement("SPAN");
-            spanElementForTaskCount.id = list.id;
-            spanElementForTaskCount.className = "taskCount";
-            let CountTextElement = document.createTextNode(unFinishedTasksLength);
-            spanElementForTaskCount.appendChild(CountTextElement);
-            innerDivElement.appendChild(spanElementForTaskCount);
-        }
+        setUnfinishedTaskCountInDiv(list, innerDivElement);
         divElement.appendChild(innerDivElement);
         listContainer.appendChild(divElement);
     }
 }
 
+/**
+ * Adds Event Listner for Trash Icon 
+ */
 document.getElementById("trashListIcon").addEventListener("click", function() {
     if(confirm("Are you want to delete" + activeList.name)){
         activeList.status = false;
@@ -50,62 +96,87 @@ function getIndexOfList(list) {
     return list === activeList;
 }
 
-function loadTasks() {
-    
+function setActiveListName() {
     if(activeList.status === true) {
         document.getElementById("displayListTitle").innerHTML = activeList.name;
-    } else {
+    } else { //TODO change default list as "Task"
         document.getElementById("displayListTitle").innerHTML = "Tasks";
-        document.getElementById("tasksContainer").innerHTML = "";
+        activeList = "";
+        document.getElementById("taskDetails").style.display = "none";
         /*var previousListIndex = collectionOfList.findIndex(getIndexOfList) - 1;
         activeList = collectionOfList[previousListIndex];
-
         document.getElementById("displayListTitle").innerHTML = activeList.name;*/
     }
+}
+
+function getTaskDiv(task) {
+    var divElement = getDiv();
+    addClickEventInTask(divElement);
+    divElement.className = "tasks";
+    divElement.id = task.id;
+    return divElement;
+}
+
+function getTaskCheckBox(task) {
+    var checkBoxDiv = getDiv();
+    checkBoxDiv.className = "checkBox";
+    var checkBox = document.createElement("INPUT");
+    checkBox.type = "checkbox";
+    checkBox.id = "taskCheckBox" + task.id;
+    checkBox.name = task.id;
+    if(task.isFinished) {
+        checkBox.checked = true;
+    } else {
+        checkBox.checked = false;
+    }
+    addEventListenerForCheckBox(checkBox);
+    var label = document.createElement("LABEL");
+    label.htmlFor = "taskCheckBox" + task.id;
+    checkBoxDiv.appendChild(checkBox);
+    checkBoxDiv.appendChild(label);
+    return checkBoxDiv;
+}
+
+function getTaskInnerDiv(task) {
+    var divElement = getDiv();
+    divElement.className = "taskTitle";
+    divElement.id = task.id;
+    return divElement;
+}
+
+function changeSpanClassNameByTask(task, spanElement) {
+    if(task.isFinished) {
+        spanElement.className = "finished";
+    } else {
+        spanElement.classList.remove("finished");
+    }
+}
+
+function setStepsCountInDiv(task, div) {
+    var stepCount = getUndeletedObjects(task.steps).length;
+    if(stepCount > 0) {
+        let finishedStepCount = task.steps.filter(step => step.isFinished === true).length;
+        let spanStepCount = getSpan();
+        let textStepCount = document.createTextNode(finishedStepCount + " of " + stepCount);
+        spanStepCount.appendChild(textStepCount);
+        div.appendChild(spanStepCount);
+    }
+}
+
+function loadTasks() {
+    setActiveListName();
     var taskContainer = document.getElementById("tasksContainer");
-    taskContainer.innerHTML = "";
+    setElementAsEmpty(taskContainer);
     for (taskIndex in activeList.tasks) {
         let task = activeList.tasks[taskIndex];
-        let divElement = document.createElement("DIV");
-        addClickEventInTask(divElement);
-        divElement.className = "tasks";
-        divElement.id = task.id;
-        let checkBoxDiv = document.createElement("DIV");
-        checkBoxDiv.className = "checkBox";
-        let checkBox = document.createElement("INPUT");
-        checkBox.type = "checkbox";
-        checkBox.id = "input" + task.id;
-        checkBox.name = task.id;
-        addEventListenerForCheckBox(checkBox);
-        let label = document.createElement("LABEL");
-        label.htmlFor = "input" + task.id;
-        checkBoxDiv.appendChild(checkBox);
-        checkBoxDiv.appendChild(label);
+        let divElement = getTaskDiv(task);
+        let checkBoxDiv = getTaskCheckBox(task);
         divElement.appendChild(checkBoxDiv);
-        let innerDivElement = document.createElement("DIV");
-        innerDivElement.className = "taskTitle";
-        innerDivElement.id = task.id;
-        let spanElement = document.createElement("SPAN");
-        if(task.isFinished) {
-            checkBox.checked = true;
-            spanElement.className = "finished";
-        } else {
-            checkBox.checked = false;
-            spanElement.classList.remove("finished");
-        }
-        spanElement.id = task.id;
-        let textElement = document.createTextNode(task.name);
-        spanElement.appendChild(textElement);
+        let innerDivElement = getTaskInnerDiv(task);
+        let spanElement = getSpanWithTextNode(task);
+        changeSpanClassNameByTask(task, spanElement);
         innerDivElement.appendChild(spanElement);
-        let stepCount = task.steps.filter(step => step.status === true).length;
-        console.log(stepCount);
-        if(stepCount > 0) {
-            let finishedStepCount = task.steps.filter(step => step.isFinished === true).length;
-            let spanStepCount = document.createElement("SPAN");
-            let textStepCount = document.createTextNode(finishedStepCount + " of " + stepCount);
-            spanStepCount.appendChild(textStepCount);
-            innerDivElement.appendChild(spanStepCount);
-        }
+        setStepsCountInDiv(task, innerDivElement);
         divElement.appendChild(innerDivElement);
         taskContainer.appendChild(divElement);
     }
@@ -168,12 +239,12 @@ function loadSteps() {
     }
     var stepContainer = document.getElementById("stepsContainer");
     stepContainer.innerHTML = "";
-    var undeletedSteps = activeTask.steps.filter(step => step.status === true);
+    var undeletedSteps = getUndeletedObjects(activeTask.steps);
     for (stepIndex in undeletedSteps) {
         let step = undeletedSteps[stepIndex];
-        let divElement = document.createElement("DIV");
+        let divElement = getDiv();
         divElement.className = "step";
-        let checkBoxDiv = document.createElement("DIV");
+        let checkBoxDiv = getDiv();
         checkBoxDiv.className = "checkBox";
         let checkBox = document.createElement("INPUT");
         checkBox.type = "checkbox";
@@ -185,11 +256,11 @@ function loadSteps() {
         checkBoxDiv.appendChild(checkBox);
         checkBoxDiv.appendChild(label);
         divElement.appendChild(checkBoxDiv);
-        let innerDivElement = document.createElement("DIV");
+        let innerDivElement = getDiv();
         innerDivElement.className = "stepTitle";
-        let spanElement = document.createElement("SPAN");
+        let spanElement = getSpan();
         let textElement = document.createTextNode(step.name);
-        let spanElementForDeletion = document.createElement("SPAN");
+        let spanElementForDeletion = getSpan();
         spanElementForDeletion.className = "deletion";
         spanElementForDeletion.id = step.id;
         addEventListenerForStepDeletion(spanElementForDeletion);
