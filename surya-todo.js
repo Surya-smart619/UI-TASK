@@ -2,30 +2,84 @@ var collectionOfList = [];
 var activeList;
 var activeTask;
 
-function getDiv() {
-    return document.createElement("DIV");
+init();
+
+function init() {
+    addEventListener(getElementById("sideBarButton"), "click", sidePanelOperation);
+    addEventListener(getElementById("trashListIcon"), "click", deleteOperationForList);
+    addEventListener(getElementById("checkbox"), "change", checkOperationForSteps);
+    addEventListener(getElementById("stepInput"), "keydown", stepInputBoxOperation);
+    addEventListener(getElementById("taskInput"), "keydown", taskInputOperation);
+    addEventListener(getElementById("listInput"), "keydown", listInputOperation);
 }
 
-function getSpan() {
-    return document.createElement("SPAN");
+/**
+ * 
+ * @param {*} element 
+ * @param {*} event 
+ * @param {*} functionName 
+ */
+function addEventListener(element, event, functionName) {
+    element.addEventListener(event, functionName);
 }
 
+/**
+ * 
+ * @param {*} parentChild 
+ * @param {*} childElement 
+ */
+function appendParentAndChild(parentChild, childElement) {
+    parentChild.appendChild(childElement);
+}
+
+/**
+ * 
+ * @param {*} elementId 
+ */
+function getElementById(elementId) {
+    return document.getElementById(elementId);
+}
+
+/**
+ * 
+ * @param {*} elementName 
+ */
+function createElementByString(elementName) {
+    return document.createElement(elementName);
+}
+
+/**
+ * 
+ * @param {*} element 
+ */
 function setElementAsEmpty(element) {
     element.innerHTML = "";
 }
 
+/**
+ * 
+ * @param {*} array 
+ */
 function getUndeletedObjects(array) {
     return array.filter(object => object.status === true);
 }
 
+/**
+ * 
+ * @param {*} list 
+ */
 function getListDiv(list) {
-    var divElement = getDiv();
-    addClickEventInLeftListTitle(divElement);
+    var divElement = createElementByString("DIV");
+    addEventListener(divElement, "click", listOperation);
     divElement.id = list.id;
     divElement.className = "leftPanelContent";
     return divElement;
 }
 
+/**
+ * 
+ * @param {*} list 
+ */
 function getListIcon(list) {
     var iElement = document.createElement("I");
     iElement.className = "fa fa-list";
@@ -33,29 +87,46 @@ function getListIcon(list) {
     return iElement;
 }
 
+/**
+ * 
+ * @param {*} list 
+ */
 function getListInnerDiv(list) {
-    var divElement = getDiv();
+    var divElement = createElementByString("DIV");
     divElement.className = "leftPanelTitle blue bold";
     divElement.id = list.id;
     return divElement;
 }
 
+/**
+ * 
+ * @param {*} object 
+ */
 function getSpanWithTextNode(object) {
-    var spanElement = getSpan();
+    var spanElement = createElementByString("SPAN");
     spanElement.id = object.id;
     let textElement = document.createTextNode(object.name);
     spanElement.appendChild(textElement);
     return spanElement;
 }
 
+/**
+ * 
+ * @param {*} array 
+ */
 function getUnfinishedObjectFromArray(array) {
     return array.filter(object => object.isFinished === false);
 }
 
+/**
+ * 
+ * @param {*} list 
+ * @param {*} div 
+ */
 function setUnfinishedTaskCountInDiv(list, div) {
     var unFinishedTasksLength = getUnfinishedObjectFromArray(list.tasks).length;
     if(unFinishedTasksLength > 0) {
-        var spanElementForTaskCount = getSpan();
+        var spanElementForTaskCount = createElementByString("SPAN");
         spanElementForTaskCount.id = list.id;
         spanElementForTaskCount.className = "taskCount";
         var CountTextElement = document.createTextNode(unFinishedTasksLength);
@@ -64,8 +135,11 @@ function setUnfinishedTaskCountInDiv(list, div) {
     }
 }
 
+/**
+ * 
+ */
 function loadLists() {
-    var listContainer = document.getElementById("sideList");
+    var listContainer = getElementById("sideList");
     setElementAsEmpty(listContainer);
     var unDeletedList = getUndeletedObjects(collectionOfList);
     for (listIndex in unDeletedList) {
@@ -83,19 +157,26 @@ function loadLists() {
 }
 
 /**
- * Adds Event Listner for Trash Icon 
+ * Soft Delete the Active List
  */
-document.getElementById("trashListIcon").addEventListener("click", function() {
+function deleteOperationForList() {
     if(confirm("Are you want to delete" + activeList.name)){
         activeList.status = false;
         loadTasks();
     }
-});
+}
 
+/**
+ * 
+ * @param {*} list 
+ */
 function getIndexOfList(list) {
     return list === activeList;
 }
 
+/**
+ * 
+ */
 function setActiveListName() {
     if(activeList.status === true) {
         document.getElementById("displayListTitle").innerHTML = activeList.name;
@@ -109,16 +190,24 @@ function setActiveListName() {
     }
 }
 
+/**
+ * 
+ * @param {*} task 
+ */
 function getTaskDiv(task) {
-    var divElement = getDiv();
-    addClickEventInTask(divElement);
+    var divElement = createElementByString("DIV");
+    addEventListener(divElement, "click", taskClickOperation)
     divElement.className = "tasks";
     divElement.id = task.id;
     return divElement;
 }
 
+/**
+ * 
+ * @param {*} task 
+ */
 function getTaskCheckBox(task) {
-    var checkBoxDiv = getDiv();
+    var checkBoxDiv = createElementByString("DIV");
     checkBoxDiv.className = "checkBox";
     var checkBox = document.createElement("INPUT");
     checkBox.type = "checkbox";
@@ -129,7 +218,7 @@ function getTaskCheckBox(task) {
     } else {
         checkBox.checked = false;
     }
-    addEventListenerForCheckBox(checkBox);
+    addEventListener(checkBox, "change", changeOperationForTaskCheckBox);
     var label = document.createElement("LABEL");
     label.htmlFor = "taskCheckBox" + task.id;
     checkBoxDiv.appendChild(checkBox);
@@ -137,13 +226,22 @@ function getTaskCheckBox(task) {
     return checkBoxDiv;
 }
 
+/**
+ * 
+ * @param {*} task 
+ */
 function getTaskInnerDiv(task) {
-    var divElement = getDiv();
+    var divElement = createElementByString("DIV");
     divElement.className = "taskTitle";
     divElement.id = task.id;
     return divElement;
 }
 
+/**
+ * 
+ * @param {*} task 
+ * @param {*} spanElement 
+ */
 function changeSpanClassNameByTask(task, spanElement) {
     if(task.isFinished) {
         spanElement.className = "finished";
@@ -152,17 +250,25 @@ function changeSpanClassNameByTask(task, spanElement) {
     }
 }
 
+/**
+ * 
+ * @param {*} task 
+ * @param {*} div 
+ */
 function setStepsCountInDiv(task, div) {
     var stepCount = getUndeletedObjects(task.steps).length;
     if(stepCount > 0) {
         let finishedStepCount = task.steps.filter(step => step.isFinished === true).length;
-        let spanStepCount = getSpan();
+        let spanStepCount = createElementByString("SPAN");
         let textStepCount = document.createTextNode(finishedStepCount + " of " + stepCount);
         spanStepCount.appendChild(textStepCount);
         div.appendChild(spanStepCount);
     }
 }
 
+/**
+ * 
+ */
 function loadTasks() {
     setActiveListName();
     var taskContainer = document.getElementById("tasksContainer");
@@ -183,97 +289,157 @@ function loadTasks() {
     loadLists();
 }
 
-var rightPanelCheckBox = document.getElementById("checkbox");
-rightPanelCheckBox.addEventListener("change", function(event) {
+/**
+ * 
+ */
+function checkOperationForSteps() {
     if(this.checked) {
-        rightPanelCheckBox.checked = true;
+        this.checked = true;
         activeTask.isFinished = true;
     } else {
-        rightPanelCheckBox.checked = false;
+        this.checked = false;
         activeTask.isFinished = false;
     }
     loadSteps();
     loadTasks();
-});
+}
 
-
-function addEventListenerForCheckBox(element) {
-    element.addEventListener("change", function(event){
+/**
+ * 
+ * @param {*} event 
+ */
+function changeOperationForTaskCheckBox(event) {
+    var taskId = event.target.name;
+    var task = activeList.tasks.find(task => task.id === taskId);
+    if(this.checked) {
         var taskId = event.target.name;
         var task = activeList.tasks.find(task => task.id === taskId);
-        if(this.checked) {
-            var taskId = event.target.name;
-            var task = activeList.tasks.find(task => task.id === taskId);
-            task.isFinished = true;
-        } else {
-            task.isFinished = false;
-        }
-        loadTasks();
-        loadSteps();
-    });
+        task.isFinished = true;
+    } else {
+        task.isFinished = false;
+    }
+    loadTasks();
+    loadSteps();
 }
 
-function addEventListenerForStepCheckBox(element) {
-    element.addEventListener("change", function(event){
-        var stepId = event.target.name;
-        var step = activeTask.steps.find(step => step.id === stepId);
-        if(this.checked) {
-            step.isFinished = true;
-        } else {
-            step.isFinished = false;
-        }
-        loadSteps();
-        loadTasks();
-    });
+/**
+ * 
+ */
+function changeOperationForStepCheckBox() {
+    var stepId = event.target.name;
+    var step = activeTask.steps.find(step => step.id === stepId);
+    if(this.checked) {
+        step.isFinished = true;
+    } else {
+        step.isFinished = false;
+    }
+    loadSteps();
+    loadTasks();
 }
 
-function loadSteps() {
-    var taskTitle = document.getElementById("taskName");
-    taskTitle.innerHTML = activeTask.name;
+/**
+ * 
+ */
+function toggleTaskTitle(taskTitle) {
     if(activeTask.isFinished) {
         taskTitle.className = "finished";
-        rightPanelCheckBox.checked = true;
+        getElementById("checkbox").checked = true;
     } else {
         taskTitle.classList.remove("finished");
-        rightPanelCheckBox.checked = false;
+        getElementById("checkbox").checked = false;
     }
-    var stepContainer = document.getElementById("stepsContainer");
-    stepContainer.innerHTML = "";
+}
+
+/**
+ * 
+ */
+function getStepDiv() {
+    var divElement = createElementByString("DIV");
+    divElement.className = "step";
+    return divElement;
+}
+
+/**
+ * 
+ * @param {*} step 
+ */
+function getCheckBoxDivWithCheckBox(step) {
+    var checkBoxDiv = createElementByString("DIV");
+    checkBoxDiv.className = "checkBox";
+    var checkBox = document.createElement("INPUT");
+    checkBox.type = "checkbox";
+    checkBox.id = "stepId" + step.id;
+    checkBox.name = step.id;
+    addEventListener(checkBox, "change", changeOperationForStepCheckBox);
+    var label = document.createElement("LABEL");
+    label.htmlFor = "stepId" + step.id;
+    checkBoxDiv.appendChild(checkBox);
+    checkBoxDiv.appendChild(label);
+    if(step.isFinished) {
+        checkBox.checked = true;
+    } else {
+        checkBox.checked = false;
+    }
+    return checkBoxDiv;
+}
+
+/**
+ * 
+ */
+function getStepInnerDiv() {
+    var divElement = createElementByString("DIV");
+    divElement.className = "stepTitle";
+    return divElement;
+}
+
+/**
+ * 
+ * @param {*} step 
+ */
+function getStepSpanWithName(step) {
+    let spanElement = createElementByString("SPAN");
+    let textElement = document.createTextNode(step.name);
+    spanElement.appendChild(textElement);
+    if(step.isFinished) {
+        spanElement.className = "finished";
+    } else {
+        spanElement.classList.remove("finished");
+    }
+    return spanElement;
+}
+
+/**
+ * 
+ * @param {*} step 
+ */
+function getSpanForDeletion(step) {
+    let spanElementForDeletion = createElementByString("SPAN");
+    spanElementForDeletion.className = "deletion";
+    spanElementForDeletion.id = step.id;
+    addEventListener(spanElementForDeletion, "click", stepDeletionOperation)
+    let textElementForDeletion = document.createTextNode("x");
+    spanElementForDeletion.appendChild(textElementForDeletion);
+    return spanElementForDeletion;
+}
+
+/**
+ * 
+ */
+function loadSteps() {
+    var taskTitle = getElementById("taskName");
+    taskTitle.innerHTML = activeTask.name;
+    toggleTaskTitle(taskTitle);
+    var stepContainer = getElementById("stepsContainer");
+    setElementAsEmpty(stepContainer);
     var undeletedSteps = getUndeletedObjects(activeTask.steps);
     for (stepIndex in undeletedSteps) {
         let step = undeletedSteps[stepIndex];
-        let divElement = getDiv();
-        divElement.className = "step";
-        let checkBoxDiv = getDiv();
-        checkBoxDiv.className = "checkBox";
-        let checkBox = document.createElement("INPUT");
-        checkBox.type = "checkbox";
-        checkBox.id = "input" + step.id;
-        checkBox.name = step.id;
-        addEventListenerForStepCheckBox(checkBox);
-        let label = document.createElement("LABEL");
-        label.htmlFor = "input" + step.id;
-        checkBoxDiv.appendChild(checkBox);
-        checkBoxDiv.appendChild(label);
+        let divElement = getStepDiv();
+        let checkBoxDiv = getCheckBoxDivWithCheckBox(step);
         divElement.appendChild(checkBoxDiv);
-        let innerDivElement = getDiv();
-        innerDivElement.className = "stepTitle";
-        let spanElement = getSpan();
-        let textElement = document.createTextNode(step.name);
-        let spanElementForDeletion = getSpan();
-        spanElementForDeletion.className = "deletion";
-        spanElementForDeletion.id = step.id;
-        addEventListenerForStepDeletion(spanElementForDeletion);
-        let textElementForDeletion = document.createTextNode("x");
-        if(step.isFinished) {
-            checkBox.checked = true;
-            spanElement.className = "finished";
-        } else {
-            checkBox.checked = false;
-            spanElement.classList.remove("finished");
-        }
-        spanElementForDeletion.appendChild(textElementForDeletion);
-        spanElement.appendChild(textElement);
+        let innerDivElement = getStepInnerDiv();
+        let spanElement = getStepSpanWithName(step);
+        let spanElementForDeletion = getSpanForDeletion(step);
         innerDivElement.appendChild(spanElement);
         innerDivElement.appendChild(spanElementForDeletion);
         divElement.appendChild(innerDivElement);
@@ -281,24 +447,26 @@ function loadSteps() {
     }
 }
 
-document.getElementById("sideBarButton").addEventListener("click", function() {
-    if ("50px" == document.getElementById("sideMenu").style.width) {
+function sidePanelOperation() {
+    if ("50px" == getElementById("sideMenu").style.width) {
         openLeftPanel();
     } else {
         closeLeftPanel();
     }
-});
+}
 
-function addEventListenerForStepDeletion(element) {
-    element.addEventListener("click", function(event) {
-        if(confirm("Are you sure want to delete step")) {
-            var stepId = event.target.id;
-            var step = activeTask.steps.find(step => step.id === stepId);
-            step.status = false;
-            loadSteps();
-            loadTasks();
-        }
-    });
+/**
+ * 
+ * @param {*} event 
+ */
+function stepDeletionOperation(event) {
+    if(confirm("Are you sure want to delete step")) {
+        var stepId = event.target.id;
+        var step = activeTask.steps.find(step => step.id === stepId);
+        step.status = false;
+        loadSteps();
+        loadTasks();
+    }
 }
 
 function closeLeftPanel() {
@@ -319,15 +487,22 @@ function openLeftPanel() {
     }
 }
 
-var listInput = document.getElementById("listInput");
-listInput.addEventListener("keydown", function(event) {
-    if (listInput.value != "") {
+/**
+ * 
+ * @param {*} event 
+ */
+function listInputOperation(event) {
+    if (this.value != "") {
         if (event.keyCode == 13) {
             createList(listInput);
         }
     }
-});
+}
 
+/**
+ * 
+ * @param {*} listInput 
+ */
 function createList(listInput) {
     var list = new Object();
     list.id = create_UUID();
@@ -336,30 +511,40 @@ function createList(listInput) {
     list.status = true;
     collectionOfList.push(list);
     activeList = list;
-    document.getElementById("displayListTitle").innerHTML = listInput.value;
+    getElementById("displayListTitle").innerHTML = listInput.value;
     listInput.value = "";
+    setElementAsEmpty(getElementById("tasksContainer"));
     loadLists();
-    document.getElementById("tasksContainer").innerHTML = "";
 }
 
-var taskInput = document.getElementById("taskInput");
-taskInput.addEventListener("keydown", function(event) {
-    if (taskInput.value != "") {
+/**
+ * 
+ * @param {*} event 
+ */
+function taskInputOperation(event) {
+    if (this.value != "") {
         if (event.keyCode == 13) {
             createTask(taskInput);
         }
     }
-});
+}
 
-var stepInput = document.getElementById("stepInput");
-stepInput.addEventListener("keydown", function(event) {
-    if (stepInput.value != "") {
+/**
+ * 
+ * @param {*} event 
+ */
+function stepInputBoxOperation(event) {
+    if (this.value != "") {
         if (event.keyCode == 13) {
             createStep(stepInput);
         }
     }
-});
+}
 
+/**
+ * 
+ * @param {*} taskInput 
+ */
 function createTask(taskInput) {
     var task = new Object();
     task.id = create_UUID();
@@ -371,6 +556,10 @@ function createTask(taskInput) {
     loadTasks();
 }
 
+/**
+ * 
+ * @param {*} stepInput 
+ */
 function createStep(stepInput) {
     var step = new Object();
     step.id = create_UUID();
@@ -383,30 +572,35 @@ function createStep(stepInput) {
     loadTasks();
 }
 
-function addClickEventInTask(element) {
-    element.addEventListener("click", function(event) {
-        if(event.target.tagName === 'INPUT') {
-            var activeTaskId = event.target.name;
-        } else {
-            var activeTaskId = event.target.id;
-        }
-        activeTask = activeList.tasks.find(task=>task.id === activeTaskId);
-        if(typeof activeTask !== 'undefined') {
-            document.getElementById("taskDetails").style.display = "block";
-            loadSteps();
-        }
-    });
+/**
+ * 
+ * @param {*} event 
+ */
+function taskClickOperation(event) {
+    if(event.target.tagName === 'INPUT') {
+        var activeTaskId = event.target.name;
+    } else {
+        var activeTaskId = event.target.id;
+    }
+    activeTask = activeList.tasks.find(task=>task.id === activeTaskId);
+    if(typeof activeTask !== 'undefined') {
+        getElementById("taskDetails").style.display = "block";//TODO
+        loadSteps();
+    }
 }
 
-function addClickEventInLeftListTitle(element) {
-    element.addEventListener("click", function(event) {
-        var activeListId = event.target.id;
-        activeList = collectionOfList.find(list=>list.id === activeListId);
-        document.getElementById("taskDetails").style.display = "none";
-        loadTasks();
-    });
+/**
+ * 
+ */
+function listOperation() {
+    activeList = collectionOfList.find(list=>list.id === event.target.id);
+    getElementById("taskDetails").style.display = "none";//TODO
+    loadTasks();
 }
 
+/**
+ * Creates UUID()
+ */
 function create_UUID() {
     var dt = new Date().getTime();
     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
